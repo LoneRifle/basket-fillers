@@ -1,8 +1,10 @@
 const href = uri => `https://redmart.com/product/${uri}`
 
+const inputPrice = () => Number($('#lookup input[type=number]').val())
+
 const columnOrder = ['details', 'pricing']
 const columnDefinitions = {
-  pricing: ({ promo_price, price }) => promo_price || price,
+  pricing: ({ promo_price, price }) => (promo_price || price).toFixed(2),
   details: ({ uri }, type, { title }) => `<a target="_new" href="${href(uri)}">${title}</a>`,
 }
 
@@ -21,8 +23,12 @@ function mapServerResponse (response) {
 }
 
 function mapDataTablesParams (dtParams) {
+  const price = inputPrice()
+  if (!price) {
+    return
+  }
   const params = {
-    price: '2.99-5',
+    price: `${price}-${price * 1.5}`,
   }
 
   const { length, start, order, search } = dtParams
@@ -57,18 +63,33 @@ function ajax (data, callback) {
   })
 }
 
+let items
+
 $(document).ready(() => {
-  $('#items').DataTable({
-    pageLength: 25,
-    search: { regex: false },
-    processing: true,
-    serverSide: true,
-    ajax,
-    columnDefs: columnOrder
-      .map(columnsToDefinitions)
-      .filter(d => d.render),
-    columns: columnOrder.map(data => ({ data })),
-    orderMulti: false,
-    order: [1, 'asc'],
+  $('#items').hide()
+  $('#lookup').submit((event) => {
+    const price = inputPrice()
+    if (price) {
+      if (items) {
+        items.clear().draw()
+      } else {
+        items = $('#items').DataTable({
+          pageLength: 25,
+          search: { regex: false },
+          processing: true,
+          serverSide: true,
+          ajax,
+          columnDefs: columnOrder
+            .map(columnsToDefinitions)
+            .filter(d => d.render),
+          columns: columnOrder.map(data => ({ data })),
+          orderMulti: false,
+          order: [1, 'asc'],
+        })
+        $('#items').show()
+      }
+    }
+    event.preventDefault()
+    return false
   })
 })
