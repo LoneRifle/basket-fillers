@@ -1,5 +1,5 @@
 
-Find items to fill your basket to get free delivery
+Find items to fill your basket for free delivery
 
 ## Where are you shopping at?
 
