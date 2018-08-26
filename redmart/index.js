@@ -1,7 +1,5 @@
 const href = uri => `https://redmart.com/product/${uri}`
 
-const inputPrice = () => Number($('#lookup input[type=number]').val())
-
 const columnOrder = ['details', 'pricing']
 const columnDefinitions = {
   pricing: ({ promo_price, price }) => (promo_price || price).toFixed(2),
@@ -23,7 +21,7 @@ function mapServerResponse (response) {
 }
 
 function mapDataTablesParams (dtParams) {
-  const price = inputPrice()
+  const price = Number($('#lookup input[type=number]').val())
   if (!price) {
     return
   }
@@ -50,11 +48,13 @@ function mapDataTablesParams (dtParams) {
   return params
 }
 
+const ENDPOINT = 'https://api.redmart.com/v1.6.0/catalog/search'
+
 function ajax (data, callback) {
   const qs = Object.entries(mapDataTablesParams(data))
     .map(([key, value]) => `${key}=${value}`)
     .join('&')
-  $.ajax(`https://api.redmart.com/v1.6.0/catalog/search?${qs}`, {
+  $.ajax(`${ENDPOINT}?${qs}`, {
     dataType: 'json',
     error: console.warn,
     complete: ({ responseJSON }) => {
@@ -68,26 +68,23 @@ let items
 $(document).ready(() => {
   $('#items').hide()
   $('#lookup').submit((event) => {
-    const price = inputPrice()
-    if (price) {
-      if (items) {
-        items.clear().draw()
-      } else {
-        items = $('#items').DataTable({
-          pageLength: 25,
-          search: { regex: false },
-          processing: true,
-          serverSide: true,
-          ajax,
-          columnDefs: columnOrder
-            .map(columnsToDefinitions)
-            .filter(d => d.render),
-          columns: columnOrder.map(data => ({ data })),
-          orderMulti: false,
-          order: [1, 'asc'],
-        })
-        $('#items').show()
-      }
+    if (items) {
+      items.clear().draw()
+    } else {
+      items = $('#items').DataTable({
+        pageLength: 25,
+        search: { regex: false },
+        processing: true,
+        serverSide: true,
+        ajax,
+        columnDefs: columnOrder
+          .map(columnsToDefinitions)
+          .filter(d => d.render),
+        columns: columnOrder.map(data => ({ data })),
+        orderMulti: false,
+        order: [1, 'asc'],
+      })
+      $('#items').show()
     }
     event.preventDefault()
     return false
