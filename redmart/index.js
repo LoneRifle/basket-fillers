@@ -25,15 +25,20 @@ function mapServerResponse (response) {
   return { data, recordsTotal, recordsFiltered: recordsTotal }
 }
 
+let lastKnownPrice
+
 function mapDataTablesParams (dtParams) {
-  const price = Number($('#lookup input[type=number]').val())
+  let price = Number($('#lookup input[type=number]').val())
   if (!price) {
-    return
+    $('#lookup input[type=number]').val(lastKnownPrice)
+    price = lastKnownPrice
   }
   const params = {
     toggle: 'stock_status',
     price: `${price}-${price * 1.5}`,
   }
+
+  lastKnownPrice = price
 
   const { length, start, order, search } = dtParams
 
