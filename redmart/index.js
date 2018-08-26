@@ -26,6 +26,7 @@ function mapDataTablesParams (dtParams) {
     return
   }
   const params = {
+    toggle: 'stock_status',
     price: `${price}-${price * 1.5}`,
   }
 
