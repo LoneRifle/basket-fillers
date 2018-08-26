@@ -1,0 +1,33 @@
+body {
+  font-family: "Source Sans Pro", sans-serif ! important;
+  margin: 0 0 0 0;
+}
+
+#lookup {
+  align-self: center;
+  display: flex;
+  justify-content: center;
+}
+#lookup {
+  background-color: #ff6969;
+  padding: 0.5em 0.25em 0.5em 0.25em;
+  margin-bottom: 0.25em;
+}
+#lookup * {
+  font-size: 1.25em;
+}
+#lookup input[type=number] {
+  width: 40vw;
+}
+#items {
+  width: 100% ! important;
+}
+
+@media (max-width: 640px) {
+  #lookup input[type=number] {
+    width: 100%;
+  }
+  #lookup * {
+    font-size: calc(0.75em + 1vw);
+  }
+}

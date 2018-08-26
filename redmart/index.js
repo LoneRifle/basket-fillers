@@ -2,12 +2,17 @@ const href = uri => `https://redmart.com/product/${uri}`
 
 const columnOrder = ['details', 'pricing']
 const columnDefinitions = {
-  pricing: ({ promo_price, price }) => (promo_price || price).toFixed(2),
-  details: ({ uri }, type, { title }) => `<a target="_new" href="${href(uri)}">${title}</a>`,
+  pricing: {
+    className: 'dt-body-center',
+    render: ({ promo_price, price }) => (promo_price || price).toFixed(2),
+  },
+  details: {
+    render: ({ uri }, type, { title }) => `<a target="_new" href="${href(uri)}">${title}</a>`,
+  },
 }
 
 const columnsToDefinitions =
-  (column, index) => ({ targets: [ index ], render: columnDefinitions[column] })
+  (column, targets) => ({ targets, ...columnDefinitions[column] })
 
 const sortIndices = {
   pricing: { asc: 8, desc: 16 },
@@ -73,7 +78,9 @@ $(document).ready(() => {
       items.clear().draw()
     } else {
       items = $('#items').DataTable({
-        pageLength: 25,
+        pageLength: 20,
+        pagingType: 'full',
+        lengthChange: false,
         search: { regex: false },
         processing: true,
         serverSide: true,
