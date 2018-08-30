@@ -22,6 +22,20 @@ body {
 #items {
   width: 100% ! important;
 }
+#welcome, #disclosure {
+  margin: 0 auto 3vw auto;
+  text-align: center;
+}
+#welcome {
+  width: 40vw;
+}
+#disclosure {
+  font-size: 70%;
+}
+#affiliate-toggle {
+  cursor: pointer;
+  color: brown;
+}
 
 @media (max-width: 640px) {
   #lookup input[type=number] {
@@ -29,5 +43,8 @@ body {
   }
   #lookup * {
     font-size: calc(0.75em + 1vw);
+  }
+  #welcome, #disclosure {
+    width: 75%;
   }
 }

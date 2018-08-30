@@ -1,5 +1,11 @@
-const href = uri => `https://redmart.com/product/${uri}`
+let useAffiliateLinks = true
 
+const href = uri => {
+  const url = `https://redmart.com/product/${uri}`
+  return useAffiliateLinks
+    ? `http://invol.co/aff_m?offer_id=100155&aff_id=32978&source=deeplink_generator&url=${encodeURIComponent(url)}`
+    : url
+}
 const columnOrder = ['details', 'pricing']
 const columnDefinitions = {
   pricing: {
@@ -97,9 +103,18 @@ $(document).ready(() => {
         orderMulti: false,
         order: [1, 'asc'],
       })
+      $('#welcome').hide()
       $('#items').show()
     }
     event.preventDefault()
     return false
+  })
+  $('#affiliate-toggle').click(() => {
+    useAffiliateLinks = !useAffiliateLinks
+    $('#affiliate-indicator').text(useAffiliateLinks ? 'on' : 'off')
+    $('#affiliate-prompt').text(useAffiliateLinks ? 'off' : 'on')
+    if (items) {
+      items.clear().draw()
+    }
   })
 })
