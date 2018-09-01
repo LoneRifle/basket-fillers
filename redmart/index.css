@@ -16,7 +16,7 @@ body {
 #lookup * {
   font-size: 1.25em;
 }
-#lookup input[type=text] {
+#lookup input[type=number] {
   width: 40vw;
 }
 #items {
@@ -38,7 +38,7 @@ body {
 }
 
 @media (max-width: 640px) {
-  #lookup input[type=text] {
+  #lookup input[type=number] {
     width: 100%;
   }
   #lookup * {
