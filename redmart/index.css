@@ -16,8 +16,15 @@ body {
 #lookup * {
   font-size: 1.25em;
 }
-#lookup input[type=number] {
+#lookup .currency-input {
   width: 40vw;
+  display: inline-flex;
+}
+#lookup .currency-input .currency-symbol {
+  margin-top: 0.1em;
+}
+#lookup .currency-input input {
+  width: 98%;
 }
 #items {
   width: 100% ! important;
@@ -37,9 +44,10 @@ body {
   color: brown;
 }
 
-@media (max-width: 640px) {
-  #lookup input[type=number] {
+@media (max-width: 800px) {
+  #lookup .currency-input {
     width: 100%;
+    display: inline-flex;
   }
   #lookup * {
     font-size: calc(0.75em + 1vw);
