@@ -15,11 +15,12 @@
     <link rel="stylesheet" type="text/css" href="index.css" />
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.rawgit.com/plentz/jquery-maskmoney/master/dist/jquery.maskMoney.min.js"></script>
     <script src="index.js"></script>
   </head>
   <body>
     <form id="lookup">
-      <input type="number" placeholder="How much more for free delivery?" min="0.01" step="0.01" required />
+      <input type="text" placeholder="How much more for free delivery?" required />
       <input type="submit" value="Find" />
     </form>
     <table id="items" class="display compact">

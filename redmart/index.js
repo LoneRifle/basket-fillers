@@ -34,7 +34,7 @@ function mapServerResponse (response) {
 let lastKnownPrice
 
 function mapDataTablesParams (dtParams) {
-  let price = Number($('#lookup input[type=number]').val())
+  let [price] = $('#lookup input[type=text]').maskMoney('unmasked')
   if (!price) {
     $('#lookup input[type=number]').val(lastKnownPrice)
     price = lastKnownPrice
@@ -83,6 +83,7 @@ function ajax (data, callback) {
 let items
 
 $(document).ready(() => {
+  $('input[type="text"]').maskMoney({ prefix: '$' })
   $('#items').hide()
   $('#lookup').submit((event) => {
     if (items) {
