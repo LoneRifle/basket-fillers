@@ -1,0 +1,74 @@
+body {
+  font-family: "Source Sans Pro", sans-serif ! important;
+  margin: 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#lookup {
+  grid-template-columns: 1fr;
+}
+
+#lookup {
+  width: 50vw;
+  align-self: center;
+  display: grid;
+  justify-content: center;
+  background-color: rgb(250, 198, 54);
+  padding: 0.5em 0.25em 0.5em 0.25em;
+  margin-bottom: 0.25em;
+}
+#lookup * {
+  font-size: 1.20em;
+}
+#lookup select {
+  width: 50vw;
+}
+#lookup .currency-input {
+  width: 49.8vw;
+  display: inline-flex;
+  border: 1px inset #ccc;
+}
+#lookup .currency-input input {
+  border: 0;
+}
+#lookup .currency-input .currency-symbol {
+  margin-top: 0.1em;
+}
+#lookup .currency-input input {
+  flex-grow: 1;
+}
+
+#welcome, #disclosure {
+  width: 50vw;
+  padding: 0 0 3vw 0;
+}
+#welcome {
+  line-height: 1.5em;
+}
+#disclosure {
+  font-size: 0.7em;
+}
+#affiliate-toggle {
+  cursor: pointer;
+  color: brown;
+}
+
+@media (max-width: 800px) {
+  #lookup {
+    width: 100vw;
+  }
+  #lookup select {
+    width: 100vw;
+  }
+  #lookup .currency-input {
+    width: 99.8vw;
+  }
+  #lookup * {
+    font-size: calc(0.75em + 1vw);
+  }
+  #welcome, #disclosure {
+    width: 75%;
+  }
+}
